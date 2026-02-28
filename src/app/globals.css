@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+  --sidebar-w: 240px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: #f9fafb; color: #111827; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+
+/* Mapbox */
+.mapboxgl-ctrl-logo { display: none !important; }
+.mapboxgl-ctrl-attrib { display: none !important; }
