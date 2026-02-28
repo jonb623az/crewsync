@@ -6,7 +6,8 @@ const prisma = new PrismaClient({});
 async function main() {
   console.log("🌱 Seeding CrewSync database...");
 
-  // Clean
+  // Clean (disable FK checks for safe teardown)
+  await prisma.$executeRawUnsafe("PRAGMA foreign_keys = OFF");
   await prisma.activityLog.deleteMany();
   await prisma.messageLog.deleteMany();
   await prisma.payment.deleteMany();
@@ -24,10 +25,13 @@ async function main() {
   await prisma.crewMembership.deleteMany();
   await prisma.crew.deleteMany();
   await prisma.serviceCatalog.deleteMany();
+  await prisma.automationRule.deleteMany();
+  await prisma.routePlan.deleteMany();
   await prisma.session.deleteMany();
   await prisma.account.deleteMany();
   await prisma.user.deleteMany();
   await prisma.company.deleteMany();
+  await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON");
 
   const hash = await bcrypt.hash("demo1234", 10);
 
