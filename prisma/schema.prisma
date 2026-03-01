@@ -22,17 +22,18 @@ model Company {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users       User[]
-  clients     Client[]
-  properties  Property[]
-  crews       Crew[]
-  services    ServiceCatalog[]
-  proposals   Proposal[]
-  jobs        Job[]
-  invoices    Invoice[]
-  automations AutomationRule[]
-  routes      RoutePlan[]
-  messages    MessageLog[]
+  users        User[]
+  clients      Client[]
+  properties   Property[]
+  crews        Crew[]
+  services     ServiceCatalog[]
+  proposals    Proposal[]
+  jobs         Job[]
+  invoices     Invoice[]
+  automations  AutomationRule[]
+  routes       RoutePlan[]
+  messages     MessageLog[]
+  appointments Appointment[]
 }
 
 // ─── User + Roles ───────────────────────────────────────────────────────────
@@ -58,6 +59,7 @@ model User {
   proposals       Proposal[]       @relation("ProposalCreator")
   activityLogs    ActivityLog[]
   messages        MessageLog[]
+  appointments    Appointment[]    @relation("AssignedAppointments")
 }
 
 // ─── NextAuth tables ────────────────────────────────────────────────────────
@@ -111,10 +113,11 @@ model Client {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  company    Company      @relation(fields: [companyId], references: [id])
-  properties Property[]
-  invoices   Invoice[]
-  messages   MessageLog[]
+  company      Company       @relation(fields: [companyId], references: [id])
+  properties   Property[]
+  invoices     Invoice[]
+  messages     MessageLog[]
+  appointments Appointment[]
 }
 
 // ─── Property ───────────────────────────────────────────────────────────────
@@ -142,6 +145,7 @@ model Property {
   jobs         Job[]
   photos       PropertyPhoto[]
   activityLogs ActivityLog[]
+  appointments Appointment[]
 }
 
 // ─── Tree (first-class object) ──────────────────────────────────────────────
@@ -258,12 +262,16 @@ model Job {
   propertyId     String
   proposalId     String?
   assignedToId   String?
+  crewId         String?
   number         String    @unique
   status         String    @default("UNSCHEDULED")
+  priority       String    @default("MEDIUM")
   title          String?
   instructions   String?
   clientNotes    String?
   internalNotes  String?
+  equipmentNeeds String?
+  hazardNotes    String?
   scheduledDate  DateTime?
   scheduledStart DateTime?
   scheduledEnd   DateTime?
@@ -277,6 +285,7 @@ model Job {
   property   Property     @relation(fields: [propertyId], references: [id])
   proposal   Proposal?    @relation(fields: [proposalId], references: [id])
   assignedTo User?        @relation("AssignedJobs", fields: [assignedToId], references: [id])
+  crew       Crew?        @relation(fields: [crewId], references: [id])
   tasks      JobTask[]
   checkIns   CheckInOut[]
   invoices   Invoice[]
@@ -303,6 +312,7 @@ model Crew {
 
   company Company          @relation(fields: [companyId], references: [id])
   members CrewMembership[]
+  jobs    Job[]
 }
 
 model CrewMembership {
@@ -427,4 +437,32 @@ model ActivityLog {
 
   property Property? @relation(fields: [propertyId], references: [id])
   user     User?     @relation(fields: [userId], references: [id])
+}
+
+// ─── Appointment (Estimate Appointment) ─────────────────────────────────────
+model Appointment {
+  id             String    @id @default(cuid())
+  companyId      String
+  clientId       String?
+  propertyId     String?
+  title          String
+  assignedToId   String?
+  scheduledStart DateTime?
+  scheduledEnd   DateTime?
+  status         String    @default("UNSCHEDULED")
+  notes          String?
+  clientNotes    String?
+  tags           String?
+  source         String?
+  lat            Float?
+  lng            Float?
+  address        String?
+  city           String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  company    Company   @relation(fields: [companyId], references: [id])
+  client     Client?   @relation(fields: [clientId], references: [id])
+  property   Property? @relation(fields: [propertyId], references: [id])
+  assignedTo User?     @relation("AssignedAppointments", fields: [assignedToId], references: [id])
 }

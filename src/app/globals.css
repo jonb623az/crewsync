@@ -15,3 +15,72 @@ body { margin: 0; background: #f9fafb; color: #111827; }
 /* Mapbox */
 .mapboxgl-ctrl-logo { display: none !important; }
 .mapboxgl-ctrl-attrib { display: none !important; }
+
+/* ── React Big Calendar — Dispatch Planner overrides ───────────────────── */
+.dispatch-calendar { height: 100%; }
+.dispatch-calendar .rbc-calendar { height: 100%; font-family: inherit; }
+.dispatch-calendar .rbc-toolbar { display: none; }
+
+/* Time grid */
+.dispatch-calendar .rbc-time-view { border: none; }
+.dispatch-calendar .rbc-time-header { border-bottom: 1px solid #e5e7eb; }
+.dispatch-calendar .rbc-time-header-content { border-left: 1px solid #e5e7eb; }
+.dispatch-calendar .rbc-time-content { border-top: none; }
+.dispatch-calendar .rbc-timeslot-group { border-bottom: 1px solid #f3f4f6; min-height: 40px; }
+.dispatch-calendar .rbc-time-slot { border-top: 1px solid #f9fafb; }
+.dispatch-calendar .rbc-current-time-indicator { background: #ef4444; height: 2px; }
+
+/* Day / resource headers */
+.dispatch-calendar .rbc-header {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #374151;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.dispatch-calendar .rbc-header.rbc-today { background: #ecfdf5; color: #059669; }
+
+/* Time gutter */
+.dispatch-calendar .rbc-time-gutter .rbc-timeslot-group { border-right: 1px solid #e5e7eb; }
+.dispatch-calendar .rbc-label { font-size: 10px; color: #9ca3af; font-weight: 600; padding: 0 6px; }
+
+/* Events */
+.dispatch-calendar .rbc-event {
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+  font-size: 11px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.dispatch-calendar .rbc-event:focus { outline: none; }
+.dispatch-calendar .rbc-event.rbc-selected { box-shadow: 0 0 0 2px #3b82f6 !important; }
+
+/* Month view */
+.dispatch-calendar .rbc-month-view { border: none; }
+.dispatch-calendar .rbc-month-row { border-top: 1px solid #f3f4f6; }
+.dispatch-calendar .rbc-day-bg + .rbc-day-bg { border-left: 1px solid #f3f4f6; }
+.dispatch-calendar .rbc-off-range-bg { background: #f9fafb; }
+.dispatch-calendar .rbc-today { background: #f0fdf4; }
+.dispatch-calendar .rbc-date-cell { font-size: 11px; color: #6b7280; padding: 4px 8px; }
+.dispatch-calendar .rbc-date-cell.rbc-now { font-weight: 700; color: #059669; }
+
+/* Week view */
+.dispatch-calendar .rbc-day-slot .rbc-time-slot { border-top: 1px solid #f9fafb; }
+.dispatch-calendar .rbc-day-slot + .rbc-day-slot { border-left: 1px solid #e5e7eb; }
+
+/* Drag placeholder */
+.dispatch-calendar .rbc-addons-dnd-drag-preview { opacity: 0.8; border: 2px dashed #10b981 !important; }
+.dispatch-calendar .rbc-addons-dnd-over { background: rgba(16,185,129,0.05); }
+
+/* Resource lane headers */
+.dispatch-calendar .rbc-resource-header {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #374151;
+  background: #f9fafb;
+}

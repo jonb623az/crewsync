@@ -16,19 +16,21 @@ import {
   Settings,
   TreePine,
   LogOut,
+  CalendarClock,
 } from "lucide-react";
 
 const NAV = [
-  { href: "/dashboard",  label: "Dashboard",   icon: LayoutDashboard },
-  { href: "/clients",    label: "Clients",      icon: Users },
-  { href: "/properties", label: "Properties",   icon: MapPin },
-  { href: "/map",        label: "Map",          icon: Map },
-  { href: "/proposals",  label: "Proposals",    icon: FileText },
-  { href: "/jobs",       label: "Jobs",         icon: Briefcase },
-  { href: "/crews",      label: "Crews",        icon: HardHat },
-  { href: "/invoices",   label: "Invoices",     icon: Receipt },
-  { href: "/reports",    label: "Reports",      icon: BarChart3 },
-  { href: "/settings",   label: "Settings",     icon: Settings },
+  { href: "/dashboard",  label: "Dashboard",        icon: LayoutDashboard },
+  { href: "/dispatch",   label: "Dispatch Planner", icon: CalendarClock },
+  { href: "/clients",    label: "Clients",           icon: Users },
+  { href: "/properties", label: "Properties",        icon: MapPin },
+  { href: "/map",        label: "Map",               icon: Map },
+  { href: "/proposals",  label: "Proposals",         icon: FileText },
+  { href: "/jobs",       label: "Jobs",              icon: Briefcase },
+  { href: "/crews",      label: "Crews",             icon: HardHat },
+  { href: "/invoices",   label: "Invoices",          icon: Receipt },
+  { href: "/reports",    label: "Reports",           icon: BarChart3 },
+  { href: "/settings",   label: "Settings",          icon: Settings },
 ];
 
 export default function Sidebar() {
